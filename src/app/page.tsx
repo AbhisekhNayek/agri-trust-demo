@@ -193,7 +193,10 @@ const AgriTrustDemo = () => {
   const [truckSearch, setTruckSearch] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const t = (key) => translations[language][key] || translations.en[key] || key;
+  type TranslationKeys = keyof typeof translations["en"];
+
+  const t = (key: TranslationKeys): string =>
+  translations[language]?.[key] || translations.en[key] || "en";
 
   // Simulate offline/online status with better UX
   useEffect(() => {
