@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌾 AgriTrust Connect — Demo
 
-## Getting Started
+A friendly Next.js + TypeScript demo UI showcasing a network-aware rural farming & insurance dashboard. Built with mock data to demonstrate features like claim filing, offline sync indications, truck deliveries, equipment rental, and an embedded map view.
 
-First, run the development server:
+This repo is a lightweight demo used in a hackathon setting — feel free to adapt, extend, or reuse components for your own projects.
 
-```bash
+## 🚀 Highlights
+
+- Beautiful, responsive UI built with Tailwind CSS and Framer Motion
+- Mock data for claims, trucks, weather alerts, and equipment rentals
+- Internationalization (i18n) with English, Hindi, and Bengali translations
+- Map view (react-leaflet) integrated client-side (demo-ready)
+- Offline-aware UI indicators and simple toast notifications
+
+## 🧩 Quick start
+
+Make sure Node.js is installed (recommended v18+). Then:
+
+```powershell
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Available scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` — Run development server
+- `npm run build` — Build for production
+- `npm run start` — Start production server (after build)
 
-## Learn More
+## 🧪 Notes & troubleshooting
 
-To learn more about Next.js, take a look at the following resources:
+- The demo uses `react-leaflet` for the map. If you see type warnings during local development, they were intentionally relaxed in the demo to keep things simple. For production-grade apps, extract the map into a client-only component and provide explicit types for `react-leaflet` and `leaflet`.
+- If Tailwind styles don't show, ensure `npm install` completed and your editor restarted (sometimes Tailwind requires a restart to pick up the JIT build).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Tech stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js 15 + app router
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- react-leaflet + leaflet
+- i18next / react-i18next
 
-## Deploy on Vercel
+## 🤝 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This repository is intended as a small demo. If you'd like to contribute improvements (better typing for the map, smaller bundle, tests), please open a PR or reach out.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 License
+
+This project is available under the MIT License. See `LICENSE`.
+
+---
+
+Made with ❤️ for farmers and hackathons.
