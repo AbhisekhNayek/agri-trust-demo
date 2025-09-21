@@ -187,8 +187,9 @@ const AgriTrustDemo = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const [syncStatus, setSyncStatus] = useState("synced");
-  const [language, setLanguage] = useState("en");
-  const [toast, setToast] = useState(null);
+  const [language, setLanguage] = useState<keyof typeof translations>("en");
+  type ToastType = "success" | "error" | "info";
+  const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null);
   const [claimSearch, setClaimSearch] = useState("");
   const [truckSearch, setTruckSearch] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -196,7 +197,7 @@ const AgriTrustDemo = () => {
   type TranslationKeys = keyof typeof translations["en"];
 
   const t = (key: TranslationKeys): string =>
-  translations[language]?.[key] || translations.en[key] || "en";
+    translations[language]?.[key] || translations.en[key] || key;
 
   // Simulate offline/online status with better UX
   useEffect(() => {
@@ -208,12 +209,12 @@ const AgriTrustDemo = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const showToast = (message, type = "success") => {
+  const showToast = (message: string, type: ToastType = "success") => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
   };
 
-  const StatusBadge = memo(({ status, children }) => {
+  const StatusBadge = memo(({ status, children }: { status: string; children: React.ReactNode }) => {
     const styles = {
       approved: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-lg shadow-emerald-500/20",
       pending: "bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-lg shadow-amber-500/20",
@@ -221,16 +222,18 @@ const AgriTrustDemo = () => {
       "en-route": "bg-orange-500/20 text-orange-300 border-orange-500/40 shadow-lg shadow-orange-500/20",
       delivered: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-lg shadow-emerald-500/20"
     };
-    
+    const cls = (styles as any)[status] ?? "";
+
     return (
-      <span className={`px-3 py-1 rounded-full text-xs font-medium border backdrop-blur-sm ${styles[status]}`}>
+      <span className={`px-3 py-1 rounded-full text-xs font-medium border backdrop-blur-sm ${cls}`}>
         {children}
       </span>
     );
   });
 
-  const StatCard = memo(({ icon: Icon, title, value, trend, color = "emerald" }) => {
-    const colorClasses = {
+  type StatColor = 'emerald' | 'blue' | 'purple' | 'orange';
+  const StatCard = memo(({ icon: Icon, title, value, trend, color = "emerald" }: { icon: React.ComponentType<any>; title: string; value: string; trend?: string; color?: StatColor }) => {
+    const colorClasses: Record<StatColor, string> = {
       emerald: "from-emerald-600 to-green-600",
       blue: "from-blue-600 to-cyan-600",
       purple: "from-purple-600 to-pink-600",
@@ -333,7 +336,7 @@ const AgriTrustDemo = () => {
                     <label className="text-gray-300 text-sm font-medium block mb-2">Description</label>
                     <textarea 
                       className="w-full bg-gray-900/60 border border-gray-600/50 rounded-xl p-3 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all" 
-                      rows="3"
+                      rows={3}
                       placeholder="Describe the damage in detail..."
                     />
                   </div>
