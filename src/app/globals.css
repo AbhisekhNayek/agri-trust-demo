@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
-@import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-  border-radius: 0.375rem;
-}
+/* Leaflet CSS import removed for demo placeholder map to avoid missing asset requests.
+   If you later enable the interactive react-leaflet map, import Leaflet CSS from
+   `leaflet/dist/leaflet.css` (via your bundler) or copy the images into `/public`.
+*/
 
 :root {
   --background: #ffffff;
