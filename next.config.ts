@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // required for static export in Next.js 13+
+  output: 'export', // <-- enables static export
+  // optional: basePath if your site will be hosted in a subfolder
+  // basePath: '/subfolder',
 };
 
-export default nextConfig;
+module.exports = nextConfig;
